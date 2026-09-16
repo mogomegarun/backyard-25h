@@ -1,0 +1,20 @@
+{
+  "name": "Backyard 25h Connectée",
+  "short_name": "Backyard25h",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#fc4c02",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192/fc4c02/ffffff?text=B25h",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512/fc4c02/ffffff?text=B25h",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
