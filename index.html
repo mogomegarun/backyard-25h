@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>25H Qui Courent</title>
+  <title>25H Qui Courent - Backyard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg-dark: #07080c;
-      --card-bg: rgba(15, 17, 26, 0.92);
+      --card-bg: rgba(13, 16, 27, 0.85);
+      --card-border: rgba(255, 0, 127, 0.3);
       --neon-pink: #ff007f;
       --neon-purple: #9b51e0;
+      --neon-green: #2ecc71;
       --text-white: #ffffff;
       --text-muted: #94a3b8;
       --font-cinema: 'Orbitron', sans-serif;
@@ -30,110 +32,119 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 10px;
     }
 
-    /* Conteneur Téléphone avec l'image de fond à la racine */
+    /* Conteneur Smartphone */
     .phone-screen {
-      width: 380px;
-      min-height: 780px;
-      background-color: #0d0e15;
+      width: 100%;
+      max-width: 390px;
+      min-height: 820px;
+      background-color: #0b0c13;
       background-image: 
-        linear-gradient(rgba(13, 14, 21, 0.78), rgba(13, 14, 21, 0.88)), 
-        url('doodles-bg-isoles.jpg');
+        linear-gradient(180deg, rgba(11, 12, 19, 0.82) 0%, rgba(7, 8, 12, 0.92) 100%), 
+        url('images/bg-doodles.jpg');
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
-      border: 2px solid rgba(255, 0, 127, 0.4);
-      border-radius: 42px;
-      padding: 22px 18px;
+      border: 1px solid rgba(255, 0, 127, 0.3);
+      border-radius: 40px;
+      padding: 18px 16px 0 16px;
       position: relative;
-      box-shadow: 0 0 40px rgba(255, 0, 127, 0.25);
+      box-shadow: 0 0 35px rgba(255, 0, 127, 0.2);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       overflow: hidden;
     }
 
-    /* Style des Doodles manuscrits */
+    /* Doodles manuscrits & annotations */
     .doodle-text {
       font-family: var(--font-handwritten);
       color: var(--neon-pink);
-      font-size: 1.15rem;
-      line-height: 1.1;
-      text-shadow: 0 0 6px rgba(255, 0, 127, 0.6);
+      font-size: 1.1rem;
+      line-height: 1;
       position: absolute;
       z-index: 2;
+      text-shadow: 0 0 6px rgba(255, 0, 127, 0.5);
     }
 
-    /* Header & Logo Centré */
+    /* En-tête avec Heure & Status Bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      padding: 2px 8px 6px 8px;
+    }
+
     .top-header {
       position: relative;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      margin-top: 5px;
-      margin-bottom: 2px;
+      margin-top: 4px;
     }
 
     .logo-img {
-      max-height: 65px;
+      max-height: 55px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 12px rgba(255, 0, 127, 0.6));
+      filter: drop-shadow(0 0 8px rgba(255, 0, 127, 0.6));
     }
 
-    /* Chrono & Arc */
+    /* Section Chrono & Arc */
     .timer-section {
       position: relative;
       text-align: center;
+      margin-top: 5px;
     }
 
     .arc-container {
       position: relative;
-      width: 260px;
-      height: 95px;
+      width: 280px;
+      height: 100px;
       margin: 0 auto;
     }
 
     .timer-display {
       font-family: var(--font-cinema);
-      font-size: 2.8rem;
+      font-size: 2.7rem;
       font-weight: 900;
       color: #fff;
-      text-shadow: 0 0 14px var(--neon-pink);
-      margin-top: -25px;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.8), 0 0 20px var(--neon-pink);
+      margin-top: -20px;
+      letter-spacing: 1px;
     }
 
     .stats-row {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: #f1f5f9;
-      margin: 3px 0;
-      font-weight: 600;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+      margin: 4px 0;
+      font-weight: 700;
     }
 
     /* Cartes UI Glassmorphism */
     .ui-card {
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 0, 127, 0.35);
-      border-radius: 20px;
-      padding: 14px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 12px 14px;
       position: relative;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
       z-index: 1;
     }
 
     .card-title {
       font-family: var(--font-cinema);
       font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       color: var(--text-white);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -141,9 +152,9 @@
 
     /* Carte GPX */
     .map-container {
-      height: 125px;
-      background: rgba(0, 0, 0, 0.45);
-      border-radius: 14px;
+      height: 130px;
+      background: rgba(5, 6, 10, 0.6);
+      border-radius: 12px;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -163,21 +174,20 @@
       border-bottom: none;
     }
 
-    /* Barre de Navigation */
+    /* Barre de Navigation en bas */
     .nav-bar {
       display: flex;
       justify-content: space-around;
-      padding-top: 12px;
+      align-items: center;
+      padding: 10px 0 14px 0;
       margin-top: auto;
-      border-top: 1px solid rgba(255, 0, 127, 0.25);
-      font-size: 0.7rem;
+      border-top: 1px solid rgba(255, 0, 127, 0.3);
+      font-size: 0.65rem;
       color: var(--text-muted);
       font-weight: 700;
-      background: rgba(13, 14, 21, 0.95);
-      margin-left: -18px;
-      margin-right: -18px;
-      margin-bottom: -22px;
-      padding-bottom: 16px;
+      background: rgba(11, 12, 19, 0.95);
+      margin-left: -16px;
+      margin-right: -16px;
     }
 
     .nav-item {
@@ -186,11 +196,18 @@
       align-items: center;
       gap: 3px;
       cursor: pointer;
+      color: #a0aec0;
     }
 
     .nav-item.active {
       color: var(--neon-pink);
       text-shadow: 0 0 8px var(--neon-pink);
+    }
+
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
   </style>
 </head>
@@ -198,25 +215,32 @@
 
 <div class="phone-screen">
 
-  <!-- Doodles de texte positionnés sur l'interface -->
-  <span class="doodle-text" style="top: 25px; left: 16px; transform: rotate(-8deg);">
+  <!-- Status Bar iPhone -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <span style="font-size: 0.65rem;">📶 🔋</span>
+  </div>
+
+  <!-- Annotations / Doodles de Texte de l'en-tête -->
+  <span class="doodle-text" style="top: 38px; left: 12px; transform: rotate(-6deg); font-size: 0.95rem;">
     LA BACKYARD<br>DE L'INTERNET ↙
   </span>
 
-  <span class="doodle-text" style="top: 25px; right: 16px; transform: rotate(4deg); color: #4ade80; text-align: right; font-size: 0.8rem;">
-    ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.68rem;">(GARMIN/STRAVA)</span>
+  <span class="doodle-text" style="top: 38px; right: 12px; transform: rotate(2deg); color: #2ecc71; text-align: right; font-size: 0.75rem;">
+    ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.65rem;">(GARMIN/STRAVA)</span>
   </span>
 
-  <!-- LOGO CENTRÉ EN HAUT (Chemin corrigé vers la racine) -->
+  <!-- LOGO OFFICIEL CENTRÉ (Chemin corrigé : images/...) -->
   <div class="top-header">
-    <img src="logo-25h-qui-courent.png" alt="Logo 25H Qui Courent" class="logo-img" />
+    <img src="images/logo-25h-qui-courent.png" alt="Logo 25H Qui Courent" class="logo-img" />
   </div>
 
-  <!-- SECTION CHRONO + ARC + RUNNER -->
+  <!-- CHRONO + ARC ARC-EN-CIEL + COUREUR -->
   <div class="timer-section">
     <div class="arc-container">
-      <svg width="260" height="95" viewBox="0 0 200 90">
-        <path d="M 20 85 A 75 75 0 0 1 180 85" fill="none" stroke="url(#neon-grad)" stroke-width="8" stroke-linecap="round" />
+      <svg width="280" height="100" viewBox="0 0 200 90">
+        <!-- Tracé de l'arc néon -->
+        <path d="M 20 85 A 75 75 0 0 1 180 85" fill="none" stroke="url(#neon-grad)" stroke-width="9" stroke-linecap="round" />
         <defs>
           <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#ff007f" />
@@ -224,85 +248,101 @@
           </linearGradient>
         </defs>
 
-        <g transform="translate(148, 14) scale(0.65)">
-          <circle cx="10" cy="5" r="4" fill="#ff007f" />
-          <path d="M 10 9 L 6 18 L 12 22 M 10 13 L 16 17 M 6 18 L 2 25 M 12 22 L 18 28" stroke="#ff007f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Petit coureur rose sur l'arc -->
+        <g transform="translate(142, 12) scale(0.7)">
+          <circle cx="10" cy="4" r="3.5" fill="#ff007f" />
+          <path d="M 10 8 L 6 16 L 12 20 M 10 12 L 15 15 M 6 16 L 2 23 M 12 20 L 17 26" stroke="#ff007f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
         </g>
       </svg>
     </div>
 
     <div class="timer-display">01:45:23</div>
-    <div class="stats-row"><strong>DISTANCE :</strong> 14,2 km / 21,1 km 👟</div>
-    <div class="stats-row"><strong>ALLURE :</strong> 5'12/km 💨 &nbsp;|&nbsp; <strong>D+ :</strong> 180m ↗</div>
+    <div class="stats-row">DISTANCE : 14,2 km / 21,1 km 👟</div>
+    <div class="stats-row">ALLURE : 5'12/km 💨 &nbsp;|&nbsp; D+ : 180m ↗</div>
   </div>
 
-  <!-- CARTE PARCOURS -->
+  <!-- CARTE PARCOURS (LE CHEMIN) -->
   <div class="ui-card">
-    <div class="card-title">
+    <div class="card-title" style="justify-content: center;">
       <span>LE CHEMIN</span>
-      <span class="doodle-text" style="position: relative; font-size: 0.95rem;">BOUZIN ⚡</span>
     </div>
-    
+
     <div class="map-container">
-      <svg width="100%" height="100%" viewBox="0 0 300 100">
-        <path d="M 40,80 C 60,20 100,10 140,40 C 180,70 220,20 260,50 C 240,90 100,95 40,80 Z" 
-              fill="none" stroke="#ff007f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+      <svg width="100%" height="100%" viewBox="0 0 300 110">
+        <!-- Tracé GPX de la boucle -->
+        <path d="M 50,85 C 30,50 80,20 140,30 C 200,40 260,20 250,65 C 240,95 120,95 50,85 Z" 
+              fill="none" stroke="#ff007f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
               style="filter: drop-shadow(0 0 6px #ff007f);" />
-        <circle cx="260" cy="50" r="6" fill="#fff" stroke="#ff007f" stroke-width="3" style="filter: drop-shadow(0 0 8px #fff);" />
+
+        <!-- Marqueurs sur la carte -->
+        <circle cx="250" cy="65" r="5" fill="#fff" stroke="#ff007f" stroke-width="2.5" />
+        <circle cx="170" cy="80" r="6" fill="#ff007f" />
+
+        <!-- Petit coureur sur le parcours -->
+        <g transform="translate(164, 68) scale(0.5)">
+          <circle cx="10" cy="4" r="3" fill="#fff" />
+          <path d="M 10 7 L 6 14 L 12 18" stroke="#fff" stroke-width="2" fill="none"/>
+        </g>
       </svg>
 
-      <span class="doodle-text" style="bottom: 8px; right: 12px; font-size: 0.85rem;">
-        PAR ICI ! ↘
-      </span>
+      <!-- Badge Départ / Arrivée -->
+      <div style="position: absolute; top: 8px; right: 12px; background: rgba(13, 16, 27, 0.85); border: 1px solid var(--neon-pink); padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; text-align: center; color: #fff;">
+        <strong>DÉPART</strong><br><span style="color: var(--text-muted);">ARRIVÉE</span>
+      </div>
+
+      <!-- Annotation Par Ici -->
+      <span class="doodle-text" style="bottom: 6px; right: 80px; font-size: 0.8rem;">PAR ICI ! ↘</span>
+
+      <!-- Badge REC Camera -->
+      <div style="position: absolute; bottom: 8px; right: 10px; background: #000; border: 1px solid var(--neon-pink); border-radius: 4px; padding: 2px 5px; display: flex; align-items: center; gap: 4px;">
+        <span style="font-size: 0.6rem; color: #fff; font-weight: bold;">REC</span>
+        <span style="width: 6px; height: 6px; background: var(--neon-pink); border-radius: 50%;"></span>
+      </div>
     </div>
   </div>
 
   <!-- CLASSEMENT LIVE -->
   <div class="ui-card">
     <div class="card-title">
-      <span style="color: var(--neon-pink);">CLASSEMENT LIVE</span>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <span class="doodle-text" style="position: relative; font-size: 0.9rem;">KILLCAM 🎥</span>
-        <span style="font-size: 0.65rem; background: var(--neon-pink); color: #fff; padding: 2px 5px; border-radius: 4px; font-family: var(--font-cinema);">REC</span>
-      </div>
+      <span style="color: #fff;">CLASSEMENT LIVE</span>
     </div>
 
     <div class="leader-row">
-      <span>👑 1. Clément</span>
+      <span>👑 1. Clément (21,1km)</span>
       <strong style="color: var(--neon-pink);">21,1 km</strong>
     </div>
     <div class="leader-row">
-      <span>🥈 2. Toi</span>
+      <span>🥈 2. Toi (14,2km)</span>
       <strong>14,2 km</strong>
     </div>
     <div class="leader-row">
-      <span>🥉 3. Jules</span>
+      <span>🥉 3. Jules (13,9km)</span>
       <strong style="color: var(--text-muted);">13,9 km</strong>
     </div>
   </div>
 
-  <!-- BAS DE PAGE -->
-  <div style="display: flex; justify-content: space-between; padding: 0 6px;">
-    <span class="doodle-text" style="position: relative; transform: rotate(-4deg);">PLEIN PHARE 💡</span>
-    <span class="doodle-text" style="position: relative; transform: rotate(3deg);">BACKYARD 🏃</span>
+  <!-- ANNOTATIONS BAS DE PAGE -->
+  <div style="display: flex; justify-content: space-between; padding: 0 10px; margin-top: -2px;">
+    <span class="doodle-text" style="position: relative; transform: rotate(-3deg); font-size: 0.95rem;">PLEIN PHARE 💡</span>
+    <span class="doodle-text" style="position: relative; transform: rotate(3deg); font-size: 0.95rem;">BACKYARD 🏃</span>
   </div>
 
-  <!-- NAVIGATION -->
+  <!-- BARRE DE NAVIGATION -->
   <div class="nav-bar">
     <div class="nav-item active">
-      <span style="font-size: 1.1rem;">🏃</span>
+      <span style="font-size: 1.2rem;">🏃</span>
       <span>COURSE</span>
     </div>
     <div class="nav-item">
-      <span style="font-size: 1.1rem;">🗺️</span>
+      <span style="font-size: 1.2rem;">🗺️</span>
       <span>PARCOURS</span>
     </div>
     <div class="nav-item">
-      <span style="font-size: 1.1rem;">🎓</span>
+      <span style="font-size: 1.2rem;">🎓</span>
       <span>DIPLÔME</span>
     </div>
     <div class="nav-item">
-      <span style="font-size: 1.1rem;">👥</span>
+      <span style="font-size: 1.2rem;">👥</span>
       <span>SOCIAL</span>
     </div>
   </div>
