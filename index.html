@@ -33,14 +33,14 @@
       padding: 20px;
     }
 
-    /* Conteneur Téléphone avec la planche de Doodles intégrée en arrière-plan */
+    /* Conteneur Téléphone avec l'image de fond à la racine */
     .phone-screen {
       width: 380px;
       min-height: 780px;
       background-color: #0d0e15;
       background-image: 
         linear-gradient(rgba(13, 14, 21, 0.78), rgba(13, 14, 21, 0.88)), 
-        url('/images/doodles-bg-isoles.jpg');
+        url('doodles-bg-isoles.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -163,12 +163,6 @@
       border-bottom: none;
     }
 
-    .doodle-img-icon {
-      height: 24px;
-      width: auto;
-      vertical-align: middle;
-    }
-
     /* Barre de Navigation */
     .nav-bar {
       display: flex;
@@ -213,9 +207,9 @@
     ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.68rem;">(GARMIN/STRAVA)</span>
   </span>
 
-  <!-- LOGO CENTRÉ EN HAUT (Corrigé en .png) -->
+  <!-- LOGO CENTRÉ EN HAUT (Chemin corrigé vers la racine) -->
   <div class="top-header">
-    <img src="/images/logo-25h-qui-courent.png" alt="Logo 25H Qui Courent" class="logo-img" />
+    <img src="logo-25h-qui-courent.png" alt="Logo 25H Qui Courent" class="logo-img" />
   </div>
 
   <!-- SECTION CHRONO + ARC + RUNNER -->
@@ -268,7 +262,6 @@
     <div class="card-title">
       <span style="color: var(--neon-pink);">CLASSEMENT LIVE</span>
       <div style="display: flex; align-items: center; gap: 6px;">
-        <!-- Si doodle-camerarec.png est envoyé sur GitHub, la balise ci-dessous l'affichera directement -->
         <span class="doodle-text" style="position: relative; font-size: 0.9rem;">KILLCAM 🎥</span>
         <span style="font-size: 0.65rem; background: var(--neon-pink); color: #fff; padding: 2px 5px; border-radius: 4px; font-family: var(--font-cinema);">REC</span>
       </div>
