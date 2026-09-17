@@ -3,164 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Backyard 25h Connectée</title>
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#fc4c02">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>25H Qui Courent - Backyard PWA</title>
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Lilita+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(185deg, #FF1F7C 0%, #9D4EDD 50%, #FF7043 100%);
+      --accent-pink: #FF1F7C;
+      --accent-yellow: #CCFF00;
+      --strava-orange: #FC4C02;
+      --dark-ink: #0F0E17;
+      --text-white: #FFFFFF;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-white);
+      font-family: 'Comic Neue', cursive, sans-serif;
+      margin: 0;
+      padding: 16px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .brand-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .brand-logo {
+      font-family: 'Lilita One', cursive, sans-serif;
+      font-size: 3.8rem;
+      color: #FFF;
+      text-transform: uppercase;
+      text-shadow: 
+        4px 4px 0px var(--accent-pink),
+        -4px -4px 0px var(--dark-ink),
+        4px -4px 0px var(--dark-ink),
+        -4px 4px 0px var(--dark-ink),
+        0px 6px 0px var(--dark-ink);
+      letter-spacing: -2px;
+      margin: 0;
+      display: inline-block;
+      transform: rotate(-3deg);
+    }
+
+    .brand-subtitle {
+      font-family: 'Lilita One', cursive, sans-serif;
+      font-size: 1.5rem;
+      color: var(--accent-yellow);
+      text-shadow: 2px 2px 0px var(--dark-ink);
+      margin-top: -10px;
+      text-transform: uppercase;
+      transform: rotate(1deg);
+    }
+
+    .citation-box {
+      background: rgba(15, 14, 23, 0.3);
+      border: 3px dashed rgba(255, 255, 255, 0.4);
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 0.95rem;
+      margin: 15px auto;
+      max-width: 320px;
+      text-align: center;
+    }
+
+    .custom-card {
+      background: #FFF;
+      color: var(--dark-ink);
+      border: 4px solid var(--dark-ink);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 6px 6px 0px var(--dark-ink);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timer-box {
+      background: #FF0055;
+      color: #FFF;
+      border: 4px solid var(--dark-ink);
+      border-radius: 24px;
+      padding: 15px;
+      box-shadow: 6px 6px 0px var(--dark-ink);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .speech-bubble {
+      background: #FFF;
+      color: var(--dark-ink);
+      border: 3px solid var(--dark-ink);
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-family: 'Lilita One', sans-serif;
+      display: inline-block;
+      margin-bottom: -15px;
+      z-index: 2;
+      position: relative;
+      transform: rotate(-1deg);
+    }
+
+    .timer-display {
+      font-family: 'Lilita One', sans-serif;
+      font-size: 3.8rem;
+      letter-spacing: 2px;
+      text-shadow: 4px 4px 0px var(--dark-ink);
+      color: var(--accent-yellow);
+      margin: 10px 0 0 0;
+    }
+
+    .btn-comic {
+      font-family: 'Lilita One', sans-serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      padding: 15px 20px;
+      border: 4px solid var(--dark-ink);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      width: 100%;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-comic-primary {
+      background: var(--accent-yellow);
+      color: var(--dark-ink);
+      box-shadow: 5px 5px 0px var(--dark-ink);
+    }
+
+    .btn-comic-strava {
+      background: var(--strava-orange);
+      color: #FFF;
+      box-shadow: 5px 5px 0px var(--dark-ink);
+      font-size: 1.1rem;
+    }
+
+    .btn-comic:active {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0px var(--dark-ink);
+    }
+
+    .tag-soon {
+      background: var(--dark-ink);
+      color: var(--accent-yellow);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      margin-left: auto;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen p-4 flex flex-col items-center">
+<body>
 
-  <header class="w-full max-w-md text-center py-6">
-    <h1 class="text-3xl font-extrabold text-orange-500">BACKYARD 25H</h1>
-    <p class="text-gray-400 text-sm mt-1">Édition Connectée &amp; Asynchrone</p>
-  </header>
-
-  <main class="w-full max-w-md space-y-6">
-
-    <!-- Bouton Installation PWA -->
-    <div id="install-container" class="hidden bg-gray-800 p-4 rounded-xl border border-orange-500/30 text-center">
-      <p class="text-sm text-gray-300 mb-2">Installe l'application sur ton téléphone :</p>
-      <button id="btn-install" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg w-full transition">
-        Installer l'application
-      </button>
+  <div class="brand-header">
+    <h1 class="brand-logo">25 H</h1>
+    <div class="brand-subtitle">Qui courent</div>
+    <p style="font-size: 0.9rem; letter-spacing: 1px; font-weight: bold; text-transform: uppercase; margin-top: 5px;">06 Novembre 2026</p>
+    
+    <div class="citation-box">
+      💬 <strong>1 BOUCLE C'EST RIEN,<br>25 BOUCLES C'EST 25X RIEN !</strong>
     </div>
+  </div>
 
-    <!-- Connexion Strava & Consentement -->
-    <div id="auth-card" class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
-      <h2 class="text-xl font-bold mb-4">Participation</h2>
-      
-      <div class="mb-4">
-        <label class="flex items-start gap-3 cursor-pointer">
-          <input type="checkbox" id="rgpd-consent" class="mt-1 w-4 h-4 text-orange-500 rounded bg-gray-700 border-gray-600">
-          <span class="text-xs text-gray-300">
-            J'accepte que mes métriques de course (distance, temps) soient traitées pour la validation des boucles et l'affichage du classement selon la <a href="/confidentialite.html" class="underline text-orange-400">politique de confidentialité</a>.
-          </span>
-        </label>
-      </div>
+  <div style="text-align: center;">
+    <span class="speech-bubble">PROCHAIN DÉPART !</span>
+  </div>
+  <div class="timer-box">
+    <div class="timer-display" id="chrono">00:58:12</div>
+  </div>
 
-      <button id="btn-strava" disabled class="w-full bg-gray-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 cursor-not-allowed transition">
-        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7.92 15.632h4.171"/></svg>
-        Se connecter avec Strava
-      </button>
-    </div>
+  <div class="custom-card" style="text-align: center;">
+    <h2 style="font-family: 'Lilita One', sans-serif; font-size: 2rem; margin: 0; color: #FF1F7C;">
+      🎪 BOUCLE <span id="loopCount" style="font-size: 2.8rem; color: #9D4EDD;">1</span> / 25
+    </h2>
+    <p style="margin: 5px 0 0 0; font-weight: bold;">⛰️ PARCOURS : LES PYRÉNÉES / DANS LA BOUE</p>
+  </div>
 
-    <!-- Timer / Signal Sonore -->
-    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
-      <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Signal horaire Backyard</h3>
-      <p class="text-xs text-gray-400 mb-4">Avertisseur sonore toutes les 60 minutes pendant l'effort.</p>
-      <button id="btn-alarm" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition">
-        Activer le signal horaire
-      </button>
-    </div>
+  <button class="btn-comic btn-comic-primary" onclick="validerBoucle()">
+    VALIDER MA BOUCLE ✔️
+  </button>
 
-    <!-- Classement en direct -->
-    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
-      <h2 class="text-xl font-bold mb-4 flex items-center justify-between">
-        Classement <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">En direct</span>
-      </h2>
-      <div id="leaderboard" class="space-y-3">
-        <p class="text-gray-500 text-sm text-center">Chargement du classement...</p>
-      </div>
-    </div>
-
-  </main>
+  <button class="btn-comic btn-comic-strava">
+    🍊 SE CONNECTER À STRAVA 
+    <span class="tag-soon">Bientôt dispo !</span>
+  </button>
 
   <script>
-    // 1. PWA Service Worker & Install Prompt
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
-
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById('install-container').classList.remove('hidden');
-    });
-
-    document.getElementById('btn-install').addEventListener('click', () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(() => {
-          document.getElementById('install-container').classList.add('hidden');
-        });
-      }
-    });
-
-    // 2. Gestion du consentement RGPD & Strava
-    const consentCheckbox = document.getElementById('rgpd-consent');
-    const stravaBtn = document.getElementById('btn-strava');
-
-    consentCheckbox.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        stravaBtn.disabled = false;
-        stravaBtn.classList.remove('bg-gray-600', 'cursor-not-allowed');
-        stravaBtn.classList.add('bg-[#fc4c02]', 'hover:bg-orange-600');
+    let loop = 1;
+    function validerBoucle() {
+      if (loop < 25) {
+        loop++;
+        document.getElementById('loopCount').innerText = loop;
+        alert('🎉 Boucle ' + (loop - 1) + ' validée ! En route pour la boucle ' + loop + ' !');
       } else {
-        stravaBtn.disabled = true;
-        stravaBtn.classList.add('bg-gray-600', 'cursor-not-allowed');
-        stravaBtn.classList.remove('bg-[#fc4c02]', 'hover:bg-orange-600');
-      }
-    });
-
-    stravaBtn.addEventListener('click', () => {
-      if (!stravaBtn.disabled) {
-        window.location.href = '/api/auth/strava';
-      }
-    });
-
-    // 3. Audio Alarm (Chime Backyard)
-    document.getElementById('btn-alarm').addEventListener('click', () => {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      alert('Signal horaire activé ! Un bip retentira au départ de chaque heure.');
-      
-      setInterval(() => {
-        const now = new Date();
-        if (now.getMinutes() === 0 && now.getSeconds() === 0) {
-          const osc = audioCtx.createOscillator();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(880, audioCtx.currentTime); // Note La (880Hz)
-          osc.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 1.5);
-        }
-      }, 1000);
-    });
-
-    // 4. Chargement du classement
-    async function loadLeaderboard() {
-      try {
-        const res = await fetch('/api/leaderboard');
-        const data = await res.json();
-        const container = document.getElementById('leaderboard');
-        
-        if (data.length === 0) {
-          container.innerHTML = '<p class="text-gray-500 text-sm text-center">Aucune boucle enregistrée pour le moment.</p>';
-          return;
-        }
-
-        container.innerHTML = data.map((item, index) => `
-          <div class="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg">
-            <div class="flex items-center gap-3">
-              <span class="font-bold text-lg text-orange-400 w-6">#${index + 1}</span>
-              <div>
-                <p class="font-semibold text-sm">${item.name}</p>
-                <p class="text-xs text-gray-400">Temps cumulé : ${item.total_time}</p>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="text-lg font-extrabold text-white">${item.laps}</span>
-              <span class="text-xs text-gray-400 block">boucle(s)</span>
-            </div>
-          </div>
-        `).join('');
-      } catch (err) {
-        console.error(err);
+        alert('🏆 FÉLICITATIONS ! Tu as terminé les 25h de la Backyard !');
       }
     }
-
-    loadLeaderboard();
   </script>
 </body>
 </html>
