@@ -10,12 +10,12 @@
 
   <style>
     :root {
-      --bg-dark: #0b0c10;
-      --card-bg: rgba(21, 24, 36, 0.88);
+      --bg-dark: #07080c;
+      --card-bg: rgba(15, 17, 26, 0.92);
       --neon-pink: #ff007f;
       --neon-purple: #9b51e0;
       --text-white: #ffffff;
-      --text-muted: #8e8f9f;
+      --text-muted: #94a3b8;
       --font-cinema: 'Orbitron', sans-serif;
       --font-handwritten: 'Caveat', cursive;
     }
@@ -33,119 +33,102 @@
       padding: 20px;
     }
 
-    /* Conteneur Téléphone */
+    /* Conteneur Téléphone avec la planche de Doodles intégrée en arrière-plan */
     .phone-screen {
       width: 380px;
+      min-height: 780px;
       background-color: #0d0e15;
       background-image: 
-        radial-gradient(circle, rgba(13, 14, 21, 0.85) 0%, rgba(13, 14, 21, 0.95) 100%), 
-        url('images/bg-doodles.jpg');
+        linear-gradient(rgba(13, 14, 21, 0.78), rgba(13, 14, 21, 0.88)), 
+        url('/images/doodles-bg-isoles.jpg');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       border: 2px solid rgba(255, 0, 127, 0.4);
-      border-radius: 40px;
-      padding: 20px 16px;
+      border-radius: 42px;
+      padding: 22px 18px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 127, 0.25);
+      box-shadow: 0 0 40px rgba(255, 0, 127, 0.25);
       display: flex;
       flex-direction: column;
       gap: 14px;
+      overflow: hidden;
     }
 
     /* Style des Doodles manuscrits */
     .doodle-text {
       font-family: var(--font-handwritten);
       color: var(--neon-pink);
-      font-size: 1.1rem;
-      line-height: 1;
+      font-size: 1.15rem;
+      line-height: 1.1;
       text-shadow: 0 0 6px rgba(255, 0, 127, 0.6);
       position: absolute;
+      z-index: 2;
     }
 
-    /* Top Bar : Logo Centré */
+    /* Header & Logo Centré */
     .top-header {
       position: relative;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       margin-top: 5px;
-      margin-bottom: 5px;
+      margin-bottom: 2px;
     }
-.logo-img {
-      max-height: 70px;
+
+    .logo-img {
+      max-height: 65px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 10px rgba(255, 0, 127, 0.5));
-    }
-    .logo-box {
-      border: 3px solid var(--neon-pink);
-      border-radius: 12px;
-      padding: 4px 16px;
-      background: rgba(0, 0, 0, 0.6);
-      text-align: center;
-      box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+      filter: drop-shadow(0 0 12px rgba(255, 0, 127, 0.6));
     }
 
-    .logo-title {
-      font-family: var(--font-cinema);
-      font-size: 1.8rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #ff007f 0%, #9b51e0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1;
-    }
-
-    .logo-subtitle {
-      font-family: var(--font-handwritten);
-      color: #fff;
-      font-size: 1rem;
-    }
-
-    /* Section Chrono & Arc avec Runner */
+    /* Chrono & Arc */
     .timer-section {
       position: relative;
       text-align: center;
-      padding-top: 10px;
     }
 
     .arc-container {
       position: relative;
       width: 260px;
-      height: 100px;
+      height: 95px;
       margin: 0 auto;
     }
 
     .timer-display {
       font-family: var(--font-cinema);
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 900;
       color: #fff;
-      text-shadow: 0 0 12px var(--neon-pink);
-      margin-top: -30px;
+      text-shadow: 0 0 14px var(--neon-pink);
+      margin-top: -25px;
     }
 
     .stats-row {
       font-size: 0.85rem;
-      color: #e5e7eb;
+      color: #f1f5f9;
       margin: 3px 0;
       font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
-    /* Cards Glassmorphism */
+    /* Cartes UI Glassmorphism */
     .ui-card {
       background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 0, 127, 0.3);
-      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 0, 127, 0.35);
+      border-radius: 20px;
       padding: 14px;
       position: relative;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      z-index: 1;
     }
 
     .card-title {
       font-family: var(--font-cinema);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -156,14 +139,14 @@
       justify-content: space-between;
     }
 
-    /* Map GPX */
+    /* Carte GPX */
     .map-container {
-      height: 110px;
-      background: rgba(0,0,0,0.5);
-      border-radius: 12px;
+      height: 125px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 14px;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     /* Leaderboard */
@@ -172,19 +155,35 @@
       align-items: center;
       justify-content: space-between;
       font-size: 0.85rem;
-      padding: 5px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    /* Bottom Nav */
+    .leader-row:last-child {
+      border-bottom: none;
+    }
+
+    .doodle-img-icon {
+      height: 24px;
+      width: auto;
+      vertical-align: middle;
+    }
+
+    /* Barre de Navigation */
     .nav-bar {
       display: flex;
       justify-content: space-around;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 0, 127, 0.2);
+      padding-top: 12px;
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 0, 127, 0.25);
       font-size: 0.7rem;
       color: var(--text-muted);
       font-weight: 700;
+      background: rgba(13, 14, 21, 0.95);
+      margin-left: -18px;
+      margin-right: -18px;
+      margin-bottom: -22px;
+      padding-bottom: 16px;
     }
 
     .nav-item {
@@ -205,26 +204,24 @@
 
 <div class="phone-screen">
 
-  <!-- Texte d'angle Gauche -->
-  <span class="doodle-text" style="top: 18px; left: 14px; transform: rotate(-8deg);">
+  <!-- Doodles de texte positionnés sur l'interface -->
+  <span class="doodle-text" style="top: 25px; left: 16px; transform: rotate(-8deg);">
     LA BACKYARD<br>DE L'INTERNET ↙
   </span>
 
-  <!-- Texte d'angle Droit -->
-  <span class="doodle-text" style="top: 18px; right: 14px; transform: rotate(5deg); color: #4ade80; text-align: right; font-size: 0.85rem;">
-    ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.7rem;">(GARMIN/STRAVA)</span>
+  <span class="doodle-text" style="top: 25px; right: 16px; transform: rotate(4deg); color: #4ade80; text-align: right; font-size: 0.8rem;">
+    ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.68rem;">(GARMIN/STRAVA)</span>
   </span>
 
-<!-- LOGO CENTRÉ EN HAUT -->
-<div class="top-header">
-  <img src="/images/logo-25h-qui-courent.jpg" alt="Logo 25H Qui Courent" class="logo-img" />
-</div>
+  <!-- LOGO CENTRÉ EN HAUT (Corrigé en .png) -->
+  <div class="top-header">
+    <img src="/images/logo-25h-qui-courent.png" alt="Logo 25H Qui Courent" class="logo-img" />
+  </div>
 
-  <!-- SECTION CHRONO + ARC + RUNNER SUR LA BOUCLE -->
+  <!-- SECTION CHRONO + ARC + RUNNER -->
   <div class="timer-section">
     <div class="arc-container">
-      <svg width="260" height="100" viewBox="0 0 200 90">
-        <!-- Arc Néon -->
+      <svg width="260" height="95" viewBox="0 0 200 90">
         <path d="M 20 85 A 75 75 0 0 1 180 85" fill="none" stroke="url(#neon-grad)" stroke-width="8" stroke-linecap="round" />
         <defs>
           <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -233,7 +230,6 @@
           </linearGradient>
         </defs>
 
-        <!-- RUNNER (Coureur) Positionné sur l'arc -->
         <g transform="translate(148, 14) scale(0.65)">
           <circle cx="10" cy="5" r="4" fill="#ff007f" />
           <path d="M 10 9 L 6 18 L 12 22 M 10 13 L 16 17 M 6 18 L 2 25 M 12 22 L 18 28" stroke="#ff007f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
@@ -246,21 +242,18 @@
     <div class="stats-row"><strong>ALLURE :</strong> 5'12/km 💨 &nbsp;|&nbsp; <strong>D+ :</strong> 180m ↗</div>
   </div>
 
-  <!-- CARTE PARCOURS (Sans texte 'Pyrénées') -->
+  <!-- CARTE PARCOURS -->
   <div class="ui-card">
     <div class="card-title">
       <span>LE CHEMIN</span>
-      <!-- AJOUT : Bouzin -->
       <span class="doodle-text" style="position: relative; font-size: 0.95rem;">BOUZIN ⚡</span>
     </div>
     
     <div class="map-container">
       <svg width="100%" height="100%" viewBox="0 0 300 100">
-        <!-- Tracé GPX Néon -->
         <path d="M 40,80 C 60,20 100,10 140,40 C 180,70 220,20 260,50 C 240,90 100,95 40,80 Z" 
               fill="none" stroke="#ff007f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
               style="filter: drop-shadow(0 0 6px #ff007f);" />
-        <!-- Marqueur Coureur -->
         <circle cx="260" cy="50" r="6" fill="#fff" stroke="#ff007f" stroke-width="3" style="filter: drop-shadow(0 0 8px #fff);" />
       </svg>
 
@@ -274,8 +267,8 @@
   <div class="ui-card">
     <div class="card-title">
       <span style="color: var(--neon-pink);">CLASSEMENT LIVE</span>
-      <!-- AJOUT : Killcam -->
       <div style="display: flex; align-items: center; gap: 6px;">
+        <!-- Si doodle-camerarec.png est envoyé sur GitHub, la balise ci-dessous l'affichera directement -->
         <span class="doodle-text" style="position: relative; font-size: 0.9rem;">KILLCAM 🎥</span>
         <span style="font-size: 0.65rem; background: var(--neon-pink); color: #fff; padding: 2px 5px; border-radius: 4px; font-family: var(--font-cinema);">REC</span>
       </div>
@@ -295,8 +288,8 @@
     </div>
   </div>
 
-  <!-- BAS DE PAGE (Sans 'Joie' ni 'Travail d'équipe') -->
-  <div style="display: flex; justify-content: space-between; margin-top: 4px; padding: 0 8px;">
+  <!-- BAS DE PAGE -->
+  <div style="display: flex; justify-content: space-between; padding: 0 6px;">
     <span class="doodle-text" style="position: relative; transform: rotate(-4deg);">PLEIN PHARE 💡</span>
     <span class="doodle-text" style="position: relative; transform: rotate(3deg);">BACKYARD 🏃</span>
   </div>
