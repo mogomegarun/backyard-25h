@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>25H Qui Courent - Baekdu Daegan Edition</title>
+  <title>25H Qui Courent - Application Officielle</title>
   <link rel="manifest" href="manifest.json">
   
-  <!-- Google Fonts : Synthwave/Cinéma + Doodle Manuscrits -->
+  <!-- Google Fonts : Synthwave + Doodle Manuscrits -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ==============================================
-       DESIGN SYSTEM - CLEMQUICOURT x BAEKDU DAEGAN
+       DESIGN SYSTEM - CLEMQUICOURT x 25H QUI COURENT
        ============================================== */
     :root {
       --bg-main: #0b0c10;
@@ -24,7 +24,6 @@
       --neon-purple: #9b51e0;
       --neon-orange: #ff5e36;
       --gradient-primary: linear-gradient(135deg, #ff007f 0%, #9b51e0 100%);
-      --gradient-glow: linear-gradient(135deg, rgba(255, 0, 127, 0.3) 0%, rgba(155, 81, 224, 0.3) 100%);
 
       --text-primary: #ffffff;
       --text-muted: #8e8f9f;
@@ -35,7 +34,6 @@
       --font-doodle: 'Caveat', cursive;
 
       --shadow-neon-pink: 0 0 20px rgba(255, 0, 127, 0.4);
-      --shadow-neon-purple: 0 0 20px rgba(155, 81, 224, 0.4);
       --border-glow: 1px solid rgba(255, 0, 127, 0.25);
     }
 
@@ -49,6 +47,7 @@
       padding: 0 0 90px 0;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* En-tête */
@@ -87,6 +86,7 @@
       max-width: 500px;
       margin: 0 auto;
       padding: 16px;
+      position: relative;
     }
 
     .tab-content { display: none; }
@@ -101,6 +101,7 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
       margin-bottom: 20px;
+      position: relative;
       transition: all 0.3s ease;
     }
 
@@ -120,7 +121,32 @@
       gap: 8px;
     }
 
-    /* Ring Timer / Anneau Chrono Cinématique */
+    /* Illustrations SVG Doodles intégrées */
+    .svg-doodle {
+      stroke: var(--neon-magenta);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 6px rgba(255, 0, 127, 0.6));
+    }
+
+    .doodle-bg-mountains {
+      width: 100%;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    .doodle-corner {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 35px;
+      height: 35px;
+      opacity: 0.8;
+    }
+
+    /* Ring Timer / Chrono */
     .timer-container {
       text-align: center;
       position: relative;
@@ -209,10 +235,6 @@
       font-family: var(--font-ui);
       font-size: 0.9rem;
     }
-    .form-group input:focus {
-      outline: none;
-      border-color: var(--neon-magenta);
-    }
 
     /* Dossard Virtuel Néon */
     .bib-card {
@@ -264,7 +286,7 @@
     }
     table.leaderboard th { color: var(--text-muted); font-family: var(--font-cinema); font-size: 0.75rem; }
 
-    /* Navigation Basse Synthwave */
+    /* Navigation Basse */
     nav.bottom-nav {
       position: fixed;
       bottom: 0;
@@ -301,14 +323,27 @@
 
   <header>
     <h1 class="title-cinema">25H QUI COURENT</h1>
-    <div class="annotation-doodle">By Clemquicourt • Baekdu Daegan Style</div>
+    <div class="annotation-doodle">By Clemquicourt • Par ici ! ↘</div>
   </header>
 
   <div class="container">
 
     <!-- TAB 1 : COURSE EN DIRECT -->
     <div id="tab-live" class="tab-content active">
+      
+      <!-- Banner Illustration Montagnes Doodle -->
+      <svg class="svg-doodle doodle-bg-mountains" viewBox="0 0 300 50">
+        <path d="M 5,45 L 45,15 L 85,45 L 130,10 L 185,45 L 230,20 L 295,45" />
+        <path d="M 120,20 L 130,10 L 140,20" />
+        <circle cx="260" cy="12" r="5" />
+      </svg>
+
       <div class="card-dark timer-container">
+        <!-- SVG Doodle Tente Bivouac -->
+        <svg class="svg-doodle doodle-corner" viewBox="0 0 24 24">
+          <path d="M 3,21 L 12,3 L 21,21 Z M 12,3 L 12,21" />
+        </svg>
+
         <div class="annotation-doodle" style="margin-bottom: 10px;">Prochain départ !</div>
         <div class="timer-ring">
           <span class="time" id="chrono">25:00:00</span>
@@ -320,12 +355,23 @@
       </div>
 
       <div class="card-dark">
+        <!-- SVG Doodle Flamme / Énergie -->
+        <svg class="svg-doodle doodle-corner" viewBox="0 0 24 24">
+          <path d="M12 2c1.15 3.14 3 5.14 5 7.5 2.5 3 3.5 6.5 2 10.5-1.5 4-6 6-10 4.5S3.5 18.5 5 14.5c1-2.5 3-4.5 5-6.5C10.5 6 11 4 12 2z" />
+        </svg>
+
         <h2>⏱️ Validation Manuelle</h2>
         <p style="font-size: 0.8rem; color: var(--text-muted);">Valide ton tour si ta montre n'est pas synchronisée.</p>
         <button class="btn-neon" onclick="validateManualLoop()">Valider ma boucle ✔️</button>
       </div>
 
       <div class="card-dark">
+        <!-- SVG Doodle Caméra / REC -->
+        <svg class="svg-doodle doodle-corner" viewBox="0 0 24 24">
+          <path d="M23 7l-7 5 7 5V7z" />
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+        </svg>
+
         <h2>📁 Import Trace (.GPX / .FIT)</h2>
         <div class="form-group">
           <label>Fichier de course :</label>
@@ -371,7 +417,11 @@
       <div class="card-dark" id="bibContainer" style="display: none;">
         <h2>✨ Votre Dossard Officiel</h2>
         <div class="bib-card">
-          <div style="font-family: var(--font-cinema); font-size: 0.75rem; letter-spacing: 2px; color: var(--neon-purple);">BAEKDU DAEGAN • 2026</div>
+          <!-- SVG Doodle T-shirt -->
+          <svg class="svg-doodle" style="width: 40px; height: 40px; margin-bottom: 6px;" viewBox="0 0 24 24">
+            <path d="M20.38 3.46L16 2 12 5 8 2 3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
+          </svg>
+          <div style="font-family: var(--font-cinema); font-size: 0.75rem; letter-spacing: 2px; color: var(--neon-purple);">25H QUI COURENT • 2026</div>
           <div class="bib-number" id="bibNumDisplay">#104</div>
           <div style="font-weight: 800; font-size: 1.2rem; text-transform: uppercase;" id="bibNameDisplay">ALEX MARTIN</div>
           <div class="annotation-doodle" style="margin-top: 10px;">Ready to run !</div>
@@ -440,7 +490,7 @@
 
   </div>
 
-  <!-- Barre de navigation dynamique -->
+  <!-- Barre de navigation -->
   <nav class="bottom-nav">
     <button class="active" onclick="switchTab('live', this)"><span>⏱️</span>Course</button>
     <button onclick="switchTab('registration', this)"><span>🎽</span>Dossard</button>
