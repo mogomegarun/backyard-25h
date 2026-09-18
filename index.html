@@ -367,12 +367,12 @@
 
 </div>
 
-<!-- SCRIPT SUPABASE DE CONNEXION -->
+<!-- SCRIPT SUPABASE -->
 <script>
   const SUPABASE_URL = "https://kllgzilqoonbgafxosna.supabase.co"; 
-  const SUPABASE_KEY = "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax";
+  const SUPABASE_KEY = "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax"; 
 
-  if (window.supabase && SUPABASE_KEY !== "VOTRE_SUPABASE_ANON_KEY") {
+  if (window.supabase && SUPABASE_KEY !== "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax") {
     const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     async function loadLiveLeaderboard() {
