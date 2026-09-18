@@ -47,7 +47,7 @@
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      padding-bottom: 75px;
+      padding-bottom: 80px;
     }
 
     @media (min-width: 450px) {
@@ -57,6 +57,11 @@
         border-radius: 40px;
         margin: 20px 0;
       }
+    }
+
+    /* Rend le fond blanc des PNG transparent sur le fond sombre */
+    .transparent-blend {
+      mix-blend-mode: screen;
     }
 
     .doodle-text {
@@ -159,19 +164,20 @@
       text-align: center;
     }
 
+    /* CARTE ET CHEMIN CONFORME AU MODÈLE */
     .map-container {
-      height: 160px;
-      background: rgba(5, 6, 10, 0.7);
+      height: 200px;
+      background: #090c15;
       border-radius: 12px;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 0, 127, 0.2);
     }
 
     .img-depart {
       position: absolute;
       top: 10px;
-      right: 15px;
+      right: 12px;
       width: 55px;
       z-index: 5;
     }
@@ -179,18 +185,36 @@
     .img-camera-rec {
       position: absolute;
       bottom: 12px;
-      right: 15px;
-      width: 48px;
+      right: 12px;
+      width: 45px;
       z-index: 5;
     }
 
     .img-runner-map {
       position: absolute;
-      bottom: 45px;
-      right: 85px;
-      width: 22px;
+      bottom: 50px;
+      right: 90px;
+      width: 26px;
       z-index: 5;
-      filter: drop-shadow(0 0 4px var(--neon-pink));
+      filter: drop-shadow(0 0 6px var(--neon-pink));
+    }
+
+    .bg-doodle-left {
+      position: absolute;
+      top: 15px;
+      left: 10px;
+      width: 60px;
+      opacity: 0.8;
+      z-index: 3;
+    }
+
+    .bg-doodle-right {
+      position: absolute;
+      bottom: 15px;
+      left: 12px;
+      width: 50px;
+      opacity: 0.8;
+      z-index: 3;
     }
 
     .leader-row {
@@ -214,6 +238,7 @@
       z-index: 4;
     }
 
+    /* NAVIGATION PAR ONGLETS CLIQUABLES */
     .nav-bar {
       position: absolute;
       bottom: 0;
@@ -238,29 +263,55 @@
       gap: 3px;
       cursor: pointer;
       color: #a0aec0;
+      transition: all 0.2s ease;
+      background: none;
+      border: none;
     }
 
-    .nav-item.active {
+    .nav-item:hover, .nav-item.active {
       color: var(--neon-pink);
       text-shadow: 0 0 8px var(--neon-pink);
     }
 
-    .bg-doodle-left {
-      position: absolute;
-      top: 310px;
-      left: 2px;
-      width: 65px;
-      opacity: 0.6;
-      z-index: 1;
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
     }
 
-    .bg-doodle-right {
+    /* MODAL DE CONNEXION / PPS */
+    .modal-overlay {
       position: absolute;
-      top: 320px;
-      right: 2px;
-      width: 50px;
-      opacity: 0.6;
-      z-index: 1;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 30;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: #111422;
+      border: 1px solid var(--neon-pink);
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      width: 100%;
     }
   </style>
 </head>
@@ -277,67 +328,132 @@
     LA BACKYARD<br>DE L'INTERNET ↙
   </span>
 
-  <span class="doodle-text" style="top: 42px; right: 14px; transform: rotate(2deg); color: #2ecc71; text-align: right; font-size: 0.72rem;">
-    ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.6rem;">(GARMIN/STRAVA)</span>
-  </span>
+  <!-- LINK CLIQUABLE GARMIN / STRAVA -->
+  <button onclick="openModal('gps')" class="doodle-text" style="top: 42px; right: 14px; transform: rotate(2deg); color: #2ecc71; text-align: right; font-size: 0.72rem; background:none; border:none; cursor:pointer;">
+    ● GPS CONNECTÉ 🔗<br><span style="color: var(--text-muted); font-size: 0.6rem;">(GARMIN/STRAVA)</span>
+  </button>
 
-  <!-- LOGO (CHEMIN ABSOLU /images/) -->
-  <div class="top-header">
-    <img src="/images/doodles-logo-isoles.png" alt="25H QUI COURENT" class="logo-img" />
-  </div>
-
-  <!-- CHRONO & ARC -->
-  <div class="timer-section">
-    <div class="arc-container">
-      <svg width="280" height="95" viewBox="0 0 200 90">
-        <path d="M 20 85 A 75 75 0 0 1 180 85" fill="none" stroke="url(#neon-grad)" stroke-width="9" stroke-linecap="round" />
-        <defs>
-          <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ff007f" />
-            <stop offset="100%" stop-color="#9b51e0" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <!-- COUREUR SUR L'ARC (CHEMIN ABSOLU /images/) -->
-      <img src="/images/doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" />
+  <!-- VUE 1 : COURSE (ACCUEIL) -->
+  <div id="tab-course" class="tab-content active">
+    
+    <!-- LOGO -->
+    <div class="top-header">
+      <img src="images/doodles-logo-isoles.png" alt="25H QUI COURENT" class="logo-img transparent-blend" />
     </div>
 
-    <div class="timer-display">25:00:00</div>
-    <div class="stats-row">DISTANCE : 14,2 km / 21,1 km 👟</div>
-    <div class="stats-row">ALLURE : 5'12/km 💨 &nbsp;|&nbsp; D+ : 180m ↗</div>
+    <!-- CHRONO & ARC -->
+    <div class="timer-section">
+      <div class="arc-container">
+        <svg width="280" height="95" viewBox="0 0 200 90">
+          <path d="M 20 85 A 75 75 0 0 1 180 85" fill="none" stroke="url(#neon-grad)" stroke-width="9" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff007f" />
+              <stop offset="100%" stop-color="#9b51e0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <img src="images/doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc transparent-blend" />
+      </div>
+
+      <div class="timer-display">25:00:00</div>
+      <div class="stats-row">DISTANCE : 14,2 km / 21,1 km 👟</div>
+      <div class="stats-row">ALLURE : 5'12/km 💨 &nbsp;|&nbsp; D+ : 180m ↗</div>
+    </div>
+
+    <!-- CARTE DU CHEMIN (TRACÉ EXACT DU MODÈLE) -->
+    <div class="ui-card">
+      <div class="card-title">LE CHEMIN</div>
+      <div class="map-container">
+
+        <!-- Courbes topographiques en arrière-plan -->
+        <svg width="100%" height="100%" style="position:absolute; inset:0; opacity:0.15;">
+          <path d="M -20,40 Q 60,10 150,50 T 320,30" fill="none" stroke="#2ecc71" stroke-width="1.5" />
+          <path d="M -20,80 Q 80,40 180,90 T 320,70" fill="none" stroke="#9b51e0" stroke-width="1.5" />
+          <path d="M -20,130 Q 100,80 200,140 T 320,120" fill="none" stroke="#ff007f" stroke-width="1.5" />
+        </svg>
+
+        <!-- Tracé de la boucle de montagne -->
+        <svg width="100%" height="100%" viewBox="0 0 300 180" style="position:relative; z-index:2;">
+          <path d="M 190,30 
+                   L 210,45 
+                   L 190,80 
+                   L 180,120 
+                   L 160,135 
+                   L 130,120 
+                   L 110,140 
+                   L 100,100 
+                   L 130,80 
+                   L 135,60 
+                   L 160,35 Z" 
+                fill="none" stroke="#ff007f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+                style="filter: drop-shadow(0 0 8px #ff007f);" />
+          
+          <!-- Points lumineux d'étapes sur le parcours -->
+          <circle cx="190" cy="30" r="4.5" fill="#fff" stroke="#ff007f" stroke-width="2" />
+          <circle cx="210" cy="45" r="4.5" fill="#fff" stroke="#ff007f" stroke-width="2" />
+          <circle cx="135" cy="60" r="4.5" fill="#fff" stroke="#ff007f" stroke-width="2" />
+          <circle cx="100" cy="100" r="4.5" fill="#fff" stroke="#ff007f" stroke-width="2" />
+        </svg>
+
+        <!-- DOODLES REPOSITIONNÉS SANS DEBORDEMENT -->
+        <img src="images/doodles-tentes-isoles.png" class="bg-doodle-left transparent-blend" alt="Tentes" />
+        <img src="images/doodles-tente-seul-isoles.png" class="bg-doodle-right transparent-blend" alt="Tente" />
+
+        <img src="images/doodles-depart-isoles.png" alt="Départ" class="img-depart transparent-blend" />
+        <img src="images/doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map transparent-blend" />
+        <img src="images/doodles-camera-isoles.png" alt="REC" class="img-camera-rec transparent-blend" />
+        
+        <span class="doodle-text" style="bottom: 12px; right: 65px; font-size: 0.8rem;">PAR ICI ! ➔</span>
+        <span class="doodle-text" style="bottom: 8px; left: 12px; color: #9b51e0; font-size: 1rem;">PYRÉNÉES</span>
+      </div>
+    </div>
+
+    <!-- CLASSEMENT LIVE -->
+    <div class="ui-card">
+      <div class="card-title" style="text-align: left; color: #fff;">
+        CLASSEMENT LIVE
+      </div>
+      <div id="leaderboard-list">
+        <div class="leader-row"><span>👑 1. Clément</span><strong style="color: var(--neon-pink);">21,1 km</strong></div>
+        <div class="leader-row"><span>🥈 2. Toi</span><strong>14,2 km</strong></div>
+        <div class="leader-row"><span>🥉 3. Jules</span><strong style="color: var(--text-muted);">13,9 km</strong></div>
+      </div>
+    </div>
+
   </div>
 
-  <img src="/images/doodles-tentes-isoles.png" class="bg-doodle-left" alt="Tentes" onerror="this.style.display='none';" />
-  <img src="/images/doodles-tente-seul-isoles.png" class="bg-doodle-right" alt="Tente" onerror="this.style.display='none';" />
-
-  <!-- CARTE DU PARCOURS -->
-  <div class="ui-card">
-    <div class="card-title">LE CHEMIN</div>
-    <div class="map-container">
-      <svg width="100%" height="100%" viewBox="0 0 300 140">
-        <path d="M 140,125 C 90,120 70,80 95,50 C 115,25 150,15 180,30 C 210,45 220,85 190,110 C 175,122 155,127 140,125 Z" 
-              fill="none" stroke="#ff007f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
-              style="filter: drop-shadow(0 0 6px #ff007f);" />
-        <circle cx="180" cy="30" r="5" fill="#fff" stroke="#ff007f" stroke-width="2.5" />
-        <circle cx="120" cy="85" r="5" fill="#ff007f" />
-      </svg>
-
-      <img src="/images/doodles-depart-isoles.png" alt="Départ" class="img-depart" onerror="this.style.display='none';" />
-      <img src="/images/doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map" onerror="this.style.display='none';" />
-      <img src="/images/doodles-camera-isoles.png" alt="REC" class="img-camera-rec" onerror="this.style.display='none';" />
-      <span class="doodle-text" style="bottom: 12px; right: 75px; font-size: 0.85rem;">PAR ICI ! ↘</span>
+  <!-- VUE 2 : PARCOURS -->
+  <div id="tab-parcours" class="tab-content">
+    <div class="ui-card" style="margin-top: 40px;">
+      <div class="card-title">DÉTAILS DU PARCOURS</div>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px; text-align:center;">
+        Boucle Backyard de 6,706 km • D+ 180m par tour
+      </p>
+      <button class="btn-action" onclick="alert('Téléchargement du fichier GPX...')">📥 Télécharger la trace GPX</button>
     </div>
   </div>
 
-  <!-- CLASSEMENT LIVE -->
-  <div class="ui-card">
-    <div class="card-title" style="text-align: left; color: #fff;">
-      CLASSEMENT LIVE
+  <!-- VUE 3 : DIPLÔME & PPS -->
+  <div id="tab-diplome" class="tab-content">
+    <div class="ui-card" style="margin-top: 40px;">
+      <div class="card-title">MON DIPLÔME & PPS</div>
+      <p style="font-size:0.85rem; color:var(--text-muted); text-align:center; margin-bottom:15px;">
+        Générez votre attestation de fin de course ou déposez votre Parcours de Prévention Santé (PPS).
+      </p>
+      <button class="btn-action" onclick="openModal('pps')">📄 Déposer mon PPS / Certificat</button>
+      <button class="btn-action" style="background:#2ecc71; margin-top:8px;" onclick="alert('Génération de votre diplôme 25H...')">🎓 Télécharger mon diplôme</button>
     </div>
-    <div id="leaderboard-list">
-      <div class="leader-row"><span>👑 1. Clément</span><strong style="color: var(--neon-pink);">21,1 km</strong></div>
-      <div class="leader-row"><span>🥈 2. Toi</span><strong>14,2 km</strong></div>
-      <div class="leader-row"><span>🥉 3. Jules</span><strong style="color: var(--text-muted);">13,9 km</strong></div>
+  </div>
+
+  <!-- VUE 4 : SOCIAL -->
+  <div id="tab-social" class="tab-content">
+    <div class="ui-card" style="margin-top: 40px;">
+      <div class="card-title">COMMUNAUTÉ</div>
+      <p style="font-size:0.85rem; color:var(--text-muted); text-align:center;">
+        Partagez vos runs et encouragez les coureurs de la Backyard !
+      </p>
+      <button class="btn-action" onclick="alert('Lien du groupe Strava ouvert !')">🏃 Rejoindre le club Strava</button>
     </div>
   </div>
 
@@ -346,29 +462,69 @@
     <span class="doodle-text" style="position: relative; transform: rotate(3deg);">BACKYARD 🏃</span>
   </div>
 
+  <!-- ONGLETS DE NAVIGATION CLIQUABLES -->
   <div class="nav-bar">
-    <div class="nav-item active">
+    <button class="nav-item active" onclick="switchTab('course', this)">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 4v6m0 0l3 3m-3-3L10 7M5 14l4-2 3 3 4-4 3 3"/></svg>
       <span>COURSE</span>
-    </div>
-    <div class="nav-item">
+    </button>
+    <button class="nav-item" onclick="switchTab('parcours', this)">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
       <span>PARCOURS</span>
-    </div>
-    <div class="nav-item">
+    </button>
+    <button class="nav-item" onclick="switchTab('diplome', this)">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
       <span>DIPLÔME</span>
-    </div>
-    <div class="nav-item">
+    </button>
+    <button class="nav-item" onclick="switchTab('social', this)">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 1 0 7.75"/></svg>
       <span>SOCIAL</span>
-    </div>
+    </button>
   </div>
 
 </div>
 
-<!-- SCRIPT SUPABASE -->
+<!-- MODAL INTERACTIVE (GPS / PPS) -->
+<div id="app-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 id="modal-title" style="color:var(--neon-pink); margin-bottom:10px;">TITRE</h3>
+    <p id="modal-desc" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Description...</p>
+    <button class="btn-action" onclick="closeModal()">Fermer</button>
+  </div>
+</div>
+
 <script>
+  // GESTION DES ONGLETS DE NAVIGATION
+  function switchTab(tabName, element) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    
+    document.getElementById('tab-' + tabName).classList.add('active');
+    element.classList.add('active');
+  }
+
+  // GESTION DES MODALES
+  function openModal(type) {
+    const modal = document.getElementById('app-modal');
+    const title = document.getElementById('modal-title');
+    const desc = document.getElementById('modal-desc');
+
+    if (type === 'gps') {
+      title.innerText = 'Connexion GPS';
+      desc.innerText = 'Connectez votre compte Strava ou Garmin pour synchroniser automatiquement vos tours de Backyard.';
+    } else if (type === 'pps') {
+      title.innerText = 'Dépôt du PPS';
+      desc.innerText = 'Veuillez saisir votre attestation Parcours de Prévention Santé pour valider votre inscription.';
+    }
+
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('app-modal').style.display = 'none';
+  }
+
+  // INTEGRATION SUPABASE
   const SUPABASE_URL = "https://kllgzilqoonbgafxosna.supabase.co"; 
   const SUPABASE_KEY = "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax"; 
 
