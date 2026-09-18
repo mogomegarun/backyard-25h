@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root {
@@ -32,54 +34,51 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 10px;
+      padding: 0;
     }
 
-    /* ÉCRAN DU TÉLÉPHONE */
+    /* CONTENEUR TÉLÉPHONE / RESPONSIVE MOBILE */
     .phone-screen {
       width: 100%;
-      max-width: 390px;
-      min-height: 830px;
+      max-width: 410px;
+      min-height: 100vh;
       background-color: #0b0c13;
       border: 1px solid rgba(255, 0, 127, 0.35);
-      border-radius: 40px;
-      padding: 16px 14px 0 14px;
       position: relative;
       box-shadow: 0 0 35px rgba(255, 0, 127, 0.25);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      overflow: hidden;
+      overflow-y: auto;
+      padding-bottom: 70px;
     }
 
-    /* DOODLES DE FOND DÉCORATIFS (POSITIONNÉS DE MANIÈRE ABSOLUE) */
-    .bg-doodle {
-      position: absolute;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.85;
+    @media (min-width: 450px) {
+      .phone-screen {
+        min-height: 850px;
+        height: 850px;
+        border-radius: 40px;
+        margin: 20px 0;
+      }
     }
 
     .doodle-text {
       font-family: var(--font-handwritten);
       color: var(--neon-pink);
-      font-size: 1.05rem;
-      line-height: 1;
+      font-size: 1.1rem;
+      line-height: 1.1;
       position: absolute;
-      z-index: 2;
-      text-shadow: 0 0 6px rgba(255, 0, 127, 0.5);
+      z-index: 5;
+      text-shadow: 0 0 6px rgba(255, 0, 127, 0.6);
     }
 
-    /* EN-TÊTE ET LOGO */
     .status-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      color: #fff;
-      padding: 2px 6px 4px 6px;
-      z-index: 2;
+      padding: 12px 20px 4px 20px;
+      z-index: 10;
     }
 
     .top-header {
@@ -87,40 +86,38 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 2px;
-      z-index: 2;
+      margin-top: 5px;
+      z-index: 4;
+      min-height: 65px;
     }
 
     .logo-img {
-      max-height: 70px;
+      max-height: 65px;
       width: auto;
-      display: block;
       filter: drop-shadow(0 0 10px rgba(255, 0, 127, 0.5));
     }
 
-    /* SECTION CHRONO & ARC */
     .timer-section {
       position: relative;
       text-align: center;
-      margin-top: 2px;
-      z-index: 2;
+      margin-top: 10px;
+      z-index: 4;
     }
 
     .arc-container {
       position: relative;
       width: 280px;
-      height: 95px;
+      height: 100px;
       margin: 0 auto;
     }
 
-    /* Runner PNG positionné sur l'arc */
     .runner-on-arc {
       position: absolute;
-      top: 6px;
-      right: 32px;
-      width: 42px;
+      top: 12px;
+      right: 30px;
+      width: 38px;
       height: auto;
-      z-index: 3;
+      z-index: 5;
       filter: drop-shadow(0 0 6px var(--neon-pink));
     }
 
@@ -130,43 +127,42 @@
       font-weight: 900;
       color: #fff;
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.8), 0 0 20px var(--neon-pink);
-      margin-top: -22px;
+      margin-top: -20px;
       letter-spacing: 1px;
     }
 
     .stats-row {
       font-size: 0.85rem;
       color: #f1f5f9;
-      margin: 3px 0;
+      margin: 4px 0;
       font-weight: 700;
     }
 
-    /* CARTE UI */
     .ui-card {
       background: var(--card-bg);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid var(--card-border);
       border-radius: 18px;
-      padding: 10px 12px;
+      padding: 12px 14px;
+      margin: 10px 16px;
       position: relative;
-      z-index: 2;
+      z-index: 4;
     }
 
     .card-title {
       font-family: var(--font-cinema);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 800;
       letter-spacing: 1.2px;
       text-transform: uppercase;
       color: var(--text-white);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       text-align: center;
     }
 
-    /* CARTE DU PARCOURS */
     .map-container {
-      height: 140px;
+      height: 160px;
       background: rgba(5, 6, 10, 0.7);
       border-radius: 12px;
       position: relative;
@@ -174,61 +170,67 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Éléments PNG sur la carte */
     .img-depart {
       position: absolute;
-      top: 8px;
-      right: 12px;
+      top: 10px;
+      right: 15px;
       width: 55px;
-      z-index: 3;
+      z-index: 5;
     }
 
     .img-camera-rec {
       position: absolute;
-      bottom: 8px;
-      right: 12px;
-      width: 50px;
-      z-index: 3;
+      bottom: 12px;
+      right: 15px;
+      width: 48px;
+      z-index: 5;
     }
 
     .img-runner-map {
       position: absolute;
-      bottom: 30px;
-      right: 80px;
+      bottom: 45px;
+      right: 85px;
       width: 22px;
-      z-index: 3;
+      z-index: 5;
       filter: drop-shadow(0 0 4px var(--neon-pink));
     }
 
-    /* LEADERBOARD */
     .leader-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.85rem;
-      padding: 5px 0;
+      font-size: 0.9rem;
+      padding: 6px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .leader-row:last-child {
-      border-bottom: none;
+    .leader-row:last-child { border-bottom: none; }
+
+    .bottom-annotations {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 24px;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 4;
     }
 
-    /* BARRE DE NAVIGATION */
     .nav-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
       display: flex;
       justify-content: space-around;
       align-items: center;
       padding: 10px 0 14px 0;
-      margin-top: auto;
       border-top: 1px solid rgba(255, 0, 127, 0.3);
       font-size: 0.65rem;
       color: var(--text-muted);
       font-weight: 700;
-      background: rgba(11, 12, 19, 0.95);
-      margin-left: -14px;
-      margin-right: -14px;
-      z-index: 4;
+      background: rgba(11, 12, 19, 0.96);
+      z-index: 20;
     }
 
     .nav-item {
@@ -244,39 +246,47 @@
       color: var(--neon-pink);
       text-shadow: 0 0 8px var(--neon-pink);
     }
+
+    .bg-doodle-left {
+      position: absolute;
+      top: 310px;
+      left: 2px;
+      width: 65px;
+      opacity: 0.6;
+      z-index: 1;
+    }
+
+    .bg-doodle-right {
+      position: absolute;
+      top: 320px;
+      right: 2px;
+      width: 50px;
+      opacity: 0.6;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
 
 <div class="phone-screen">
 
-  <!-- DOODLES D'ARRIÈRE-PLAN ISOLÉS (DÉCORATIONS) -->
-  <img src="images/doodles-tentes-isoles.png" class="bg-doodle" style="top: 260px; left: -10px; width: 85px;" alt="Tentes" />
-  <img src="images/doodles-tente-seul-isoles.png" class="bg-doodle" style="top: 275px; right: -5px; width: 60px;" alt="Tente" />
-  <img src="images/doodles-tshirt-isoles.png" class="bg-doodle" style="bottom: 150px; left: -15px; width: 65px; transform: rotate(-10deg);" alt="Tshirt" />
-  <img src="images/doodles-basket-isoles.png" class="bg-doodle" style="bottom: 150px; right: -10px; width: 55px; transform: rotate(12deg);" alt="Bottes" />
-
-  <!-- STATUS BAR -->
   <div class="status-bar">
-    <span>9:41</span>
-    <span style="font-size: 0.65rem;">📶 🔋</span>
+    <span id="current-time">09:41</span>
+    <span style="font-size: 0.75rem;">📶 🔋</span>
   </div>
 
-  <!-- TEXTES ANNOTÉS -->
-  <span class="doodle-text" style="top: 36px; left: 10px; transform: rotate(-6deg); font-size: 0.9rem;">
+  <span class="doodle-text" style="top: 42px; left: 14px; transform: rotate(-5deg); font-size: 0.85rem;">
     LA BACKYARD<br>DE L'INTERNET ↙
   </span>
 
-  <span class="doodle-text" style="top: 36px; right: 10px; transform: rotate(2deg); color: #2ecc71; text-align: right; font-size: 0.72rem;">
-    ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.62rem;">(GARMIN/STRAVA)</span>
+  <span class="doodle-text" style="top: 42px; right: 14px; transform: rotate(2deg); color: #2ecc71; text-align: right; font-size: 0.72rem;">
+    ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.6rem;">(GARMIN/STRAVA)</span>
   </span>
 
-  <!-- LOGO OFFICIEL 25H ISOLÉ -->
   <div class="top-header">
-    <img src="images/doodles-logo-isoles.png" alt="Logo 25H Qui Courent" class="logo-img" />
+    <img src="logo-25h-qui-courent.png" alt="Logo 25H Qui Courent" class="logo-img" />
   </div>
 
-  <!-- SECTION CHRONO ET ARC + RUNNER PNG ISOLÉ -->
   <div class="timer-section">
     <div class="arc-container">
       <svg width="280" height="95" viewBox="0 0 200 90">
@@ -288,87 +298,134 @@
           </linearGradient>
         </defs>
       </svg>
-      <!-- IMAGE COUREUR SUR L'ARC -->
-      <img src="images/doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" />
+      <img src="doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" />
     </div>
 
-    <div class="timer-display">01:45:23</div>
-    <div class="stats-row">DISTANCE : 14,2 km / 21,1 km 👟</div>
-    <div class="stats-row">ALLURE : 5'12/km 💨 &nbsp;|&nbsp; D+ : 180m ↗</div>
+    <div class="timer-display" id="chrono">25:00:00</div>
+    <div class="stats-row" id="stat-distance">DISTANCE : 0,0 km 👟</div>
+    <div class="stats-row" id="stat-pace">ALLURE : --'--/km 💨 &nbsp;|&nbsp; D+ : 0m ↗</div>
   </div>
 
-  <!-- CARTE DU PARCOURS -->
+  <img src="doodles-tentes-isoles.png" class="bg-doodle-left" alt="Tentes" />
+  <img src="doodles-tente-seul-isoles.png" class="bg-doodle-right" alt="Tente" />
+
   <div class="ui-card">
     <div class="card-title">LE CHEMIN</div>
-
     <div class="map-container">
-      <svg width="100%" height="100%" viewBox="0 0 300 110">
-        <!-- Tracé de la boucle GPX -->
-        <path d="M 50,85 C 30,45 80,15 140,28 C 200,38 260,18 245,60 C 235,92 120,92 50,85 Z" 
-              fill="none" stroke="#ff007f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
+      <svg width="100%" height="100%" viewBox="0 0 300 140">
+        <path d="M 140,125 C 90,120 70,80 95,50 C 115,25 150,15 180,30 C 210,45 220,85 190,110 C 175,122 155,127 140,125 Z" 
+              fill="none" stroke="#ff007f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
               style="filter: drop-shadow(0 0 6px #ff007f);" />
-        
-        <!-- Points étapes -->
-        <circle cx="245" cy="60" r="5" fill="#fff" stroke="#ff007f" stroke-width="2.5" />
-        <circle cx="160" cy="78" r="5" fill="#ff007f" />
+        <circle cx="180" cy="30" r="5" fill="#fff" stroke="#ff007f" stroke-width="2.5" />
+        <circle cx="120" cy="85" r="5" fill="#ff007f" />
       </svg>
 
-      <!-- PNGs Isolés sur la carte -->
-      <img src="images/doodles-depart-isoles.png" alt="Départ/Arrivée" class="img-depart" />
-      <img src="images/doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map" />
-      <img src="images/doodles-camera-isoles.png" alt="Camera REC" class="img-camera-rec" />
-
-      <span class="doodle-text" style="bottom: 8px; right: 75px; font-size: 0.8rem;">PAR ICI ! ↘</span>
+      <img src="doodles-depart-isoles.png" alt="Départ/Arrivée" class="img-depart" />
+      <img src="doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map" />
+      <img src="doodles-camera-isoles.png" alt="Camera REC" class="img-camera-rec" />
+      <span class="doodle-text" style="bottom: 12px; right: 75px; font-size: 0.85rem;">PAR ICI ! ↘</span>
     </div>
   </div>
 
-  <!-- CLASSEMENT LIVE -->
+  <!-- CLASSEMENT LIVE CHARGÉ DEPUIS SUPABASE -->
   <div class="ui-card">
     <div class="card-title" style="text-align: left; color: #fff;">
       CLASSEMENT LIVE
     </div>
-
-    <div class="leader-row">
-      <span>👑 1. Clément</span>
-      <strong style="color: var(--neon-pink);">21,1 km</strong>
-    </div>
-    <div class="leader-row">
-      <span>🥈 2. Toi</span>
-      <strong>14,2 km</strong>
-    </div>
-    <div class="leader-row">
-      <span>🥉 3. Jules</span>
-      <strong style="color: var(--text-muted);">13,9 km</strong>
+    <div id="leaderboard-list">
+      <div class="leader-row"><span>Chargement du classement...</span></div>
     </div>
   </div>
 
-  <!-- ANNOTATIONS BAS DE PAGE -->
-  <div style="display: flex; justify-content: space-between; padding: 0 8px; z-index: 2;">
-    <span class="doodle-text" style="position: relative; transform: rotate(-3deg); font-size: 0.9rem;">PLEIN PHARE 💡</span>
-    <span class="doodle-text" style="position: relative; transform: rotate(3deg); font-size: 0.9rem;">BACKYARD 🏃</span>
+  <div class="bottom-annotations">
+    <span class="doodle-text" style="position: relative; transform: rotate(-3deg);">PLEIN PHARE 💡</span>
+    <span class="doodle-text" style="position: relative; transform: rotate(3deg);">BACKYARD 🏃</span>
   </div>
 
-  <!-- NAVIGATION -->
   <div class="nav-bar">
     <div class="nav-item active">
-      <span style="font-size: 1.1rem;">🏃</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 4v6m0 0l3 3m-3-3L10 7M5 14l4-2 3 3 4-4 3 3"/></svg>
       <span>COURSE</span>
     </div>
     <div class="nav-item">
-      <span style="font-size: 1.1rem;">🗺️</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
       <span>PARCOURS</span>
     </div>
     <div class="nav-item">
-      <span style="font-size: 1.1rem;">🎓</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
       <span>DIPLÔME</span>
     </div>
     <div class="nav-item">
-      <span style="font-size: 1.1rem;">👥</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 1 0 7.75"/></svg>
       <span>SOCIAL</span>
     </div>
   </div>
 
 </div>
+
+<script>
+  // Remplacez ces deux constantes par vos vraies clés Supabase si nécessaire
+  const SUPABASE_URL = "https://kllgzilqoonbgafxosna.supabase.co"; 
+  const SUPABASE_KEY = "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax"; 
+
+  const client = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+
+  async function loadData() {
+    if (!client) return;
+
+    // Récupérer la liste des laps et des utilisateurs
+    const { data: laps, error } = await client
+      .from('laps')
+      .select('user_id, distance_m, duration_sec');
+
+    if (error) {
+      console.error("Erreur Supabase:", error);
+      return;
+    }
+
+    // Calculer les totaux par utilisateur
+    const userTotals = {};
+    laps.forEach(lap => {
+      if (!userTotals[lap.user_id]) {
+        userTotals[lap.user_id] = { distance_m: 0, duration_sec: 0 };
+      }
+      userTotals[lap.user_id].distance_m += (lap.distance_m || 0);
+      userTotals[lap.user_id].duration_sec += (lap.duration_sec || 0);
+    });
+
+    // Récupérer les noms des utilisateurs
+    const { data: users } = await client.from('users').select('id, name');
+    const userNameMap = {};
+    if (users) {
+      users.forEach(u => userNameMap[u.id] = u.name || 'Coureur');
+    }
+
+    // Structurer le classement
+    const leaderboard = Object.keys(userTotals).map(userId => {
+      const distKm = (userTotals[userId].distance_m / 1000).toFixed(1);
+      return {
+        name: userNameMap[userId] || 'Coureur',
+        distance: parseFloat(distKm)
+      };
+    }).sort((a, b) => b.distance - a.distance);
+
+    // Mettre à jour l'affichage HTML du classement
+    const container = document.getElementById('leaderboard-list');
+    if (leaderboard.length === 0) {
+      container.innerHTML = '<div class="leader-row"><span>Aucun tour enregistré pour le moment.</span></div>';
+    } else {
+      const medals = ['👑 1.', '🥈 2.', '🥉 3.'];
+      container.innerHTML = leaderboard.map((item, index) => `
+        <div class="leader-row">
+          <span>${medals[index] || (index + 1) + '.'} ${item.name}</span>
+          <strong style="color: ${index === 0 ? 'var(--neon-pink)' : 'inherit'};">${item.distance} km</strong>
+        </div>
+      `).join('');
+    }
+  }
+
+  loadData();
+</script>
 
 </body>
 </html>
