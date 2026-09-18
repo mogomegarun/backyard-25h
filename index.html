@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Supabase Client JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -36,7 +37,6 @@
       padding: 0;
     }
 
-    /* CONTENEUR TÉLÉPHONE MOBILE-FIRST */
     .phone-screen {
       width: 100%;
       max-width: 410px;
@@ -48,7 +48,7 @@
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      padding-bottom: 70px;
+      padding-bottom: 75px;
     }
 
     @media (min-width: 450px) {
@@ -87,11 +87,11 @@
       align-items: center;
       margin-top: 5px;
       z-index: 4;
-      min-height: 65px;
+      min-height: 70px;
     }
 
     .logo-img {
-      max-height: 65px;
+      max-height: 70px;
       width: auto;
       filter: drop-shadow(0 0 10px rgba(255, 0, 127, 0.5));
     }
@@ -99,7 +99,7 @@
     .timer-section {
       position: relative;
       text-align: center;
-      margin-top: 10px;
+      margin-top: 5px;
       z-index: 4;
     }
 
@@ -112,9 +112,9 @@
 
     .runner-on-arc {
       position: absolute;
-      top: 12px;
-      right: 30px;
-      width: 38px;
+      top: 10px;
+      right: 32px;
+      width: 40px;
       height: auto;
       z-index: 5;
       filter: drop-shadow(0 0 6px var(--neon-pink));
@@ -284,8 +284,7 @@
 
   <!-- LOGO -->
   <div class="top-header">
-    <img src="logo-25h-qui-courent.png" alt="25H QUI COURENT" class="logo-img" onerror="this.style.display='none'; document.getElementById('alt-logo').style.display='block';" />
-    <h1 id="alt-logo" style="display:none; font-family: var(--font-cinema); color: var(--neon-pink); font-size: 1.4rem;">25H QUI COURENT</h1>
+    <img src="images/logo-25h-qui-courent.png" alt="25H QUI COURENT" class="logo-img" onerror="this.onerror=null; this.src='images/doodles-logo-isoles.png';" />
   </div>
 
   <!-- CHRONO & ARC -->
@@ -300,7 +299,7 @@
           </linearGradient>
         </defs>
       </svg>
-      <img src="doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" onerror="this.style.display='none';" />
+      <img src="images/doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" onerror="this.onerror=null; this.src='images/doodle-runner.svg';" />
     </div>
 
     <div class="timer-display">25:00:00</div>
@@ -308,10 +307,10 @@
     <div class="stats-row">ALLURE : 5'12/km 💨 &nbsp;|&nbsp; D+ : 180m ↗</div>
   </div>
 
-  <img src="doodles-tentes-isoles.png" class="bg-doodle-left" alt="Tentes" onerror="this.style.display='none';" />
-  <img src="doodles-tente-seul-isoles.png" class="bg-doodle-right" alt="Tente" onerror="this.style.display='none';" />
+  <img src="images/doodles-tentes-isoles.png" class="bg-doodle-left" alt="Tentes" onerror="this.style.display='none';" />
+  <img src="images/doodles-tente-seul-isoles.png" class="bg-doodle-right" alt="Tente" onerror="this.style.display='none';" />
 
-  <!-- CARTE DU PARCOURS (TRACÉ VALLONNÉ FIDELE) -->
+  <!-- CARTE DU PARCOURS -->
   <div class="ui-card">
     <div class="card-title">LE CHEMIN</div>
     <div class="map-container">
@@ -323,9 +322,9 @@
         <circle cx="120" cy="85" r="5" fill="#ff007f" />
       </svg>
 
-      <img src="doodles-depart-isoles.png" alt="Départ" class="img-depart" onerror="this.style.display='none';" />
-      <img src="doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map" onerror="this.style.display='none';" />
-      <img src="doodles-camera-isoles.png" alt="REC" class="img-camera-rec" onerror="this.style.display='none';" />
+      <img src="images/doodles-depart-isoles.png" alt="Départ" class="img-depart" onerror="this.style.display='none';" />
+      <img src="images/doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map" onerror="this.style.display='none';" />
+      <img src="images/doodles-camera-isoles.png" alt="REC" class="img-camera-rec" onerror="this.style.display='none';" />
       <span class="doodle-text" style="bottom: 12px; right: 75px; font-size: 0.85rem;">PAR ICI ! ↘</span>
     </div>
   </div>
@@ -368,17 +367,17 @@
 
 </div>
 
+<!-- SCRIPT SUPABASE DE CONNEXION -->
 <script>
-  // Connexion Supabase
   const SUPABASE_URL = "https://kllgzilqoonbgafxosna.supabase.co"; 
-  const SUPABASE_KEY = "Csb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax"; 
+  const SUPABASE_KEY = "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax";
 
-  if (window.supabase && SUPABASE_KEY !== "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax") {
+  if (window.supabase && SUPABASE_KEY !== "VOTRE_SUPABASE_ANON_KEY") {
     const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    async function fetchLiveLeaderboard() {
+    async function loadLiveLeaderboard() {
       try {
-        const { data: laps, error } = await client.from('laps').select('user_id, distance_m');
+        const { data: laps } = await client.from('laps').select('user_id, distance_m');
         if (laps && laps.length > 0) {
           const totals = {};
           laps.forEach(lap => {
@@ -392,7 +391,7 @@
           const list = Object.keys(totals).map(id => ({
             name: names[id] || 'Coureur',
             dist: (totals[id] / 1000).toFixed(1)
-          })).sort((a,b) => b.dist - a.dist);
+          })).sort((a, b) => b.dist - a.dist);
 
           if (list.length > 0) {
             const container = document.getElementById('leaderboard-list');
@@ -406,10 +405,10 @@
           }
         }
       } catch (e) {
-        console.log("Erreur chargement Supabase:", e);
+        console.error("Erreur de chargement Supabase:", e);
       }
     }
-    fetchLiveLeaderboard();
+    loadLiveLeaderboard();
   }
 </script>
 
