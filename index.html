@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -37,7 +36,7 @@
       padding: 0;
     }
 
-    /* CONTENEUR TÉLÉPHONE / RESPONSIVE MOBILE */
+    /* CONTENEUR TÉLÉPHONE MOBILE-FIRST */
     .phone-screen {
       width: 100%;
       max-width: 410px;
@@ -271,7 +270,7 @@
 <div class="phone-screen">
 
   <div class="status-bar">
-    <span id="current-time">09:41</span>
+    <span>9:41</span>
     <span style="font-size: 0.75rem;">📶 🔋</span>
   </div>
 
@@ -283,10 +282,13 @@
     ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.6rem;">(GARMIN/STRAVA)</span>
   </span>
 
+  <!-- LOGO -->
   <div class="top-header">
-    <img src="logo-25h-qui-courent.png" alt="Logo 25H Qui Courent" class="logo-img" />
+    <img src="logo-25h-qui-courent.png" alt="25H QUI COURENT" class="logo-img" onerror="this.style.display='none'; document.getElementById('alt-logo').style.display='block';" />
+    <h1 id="alt-logo" style="display:none; font-family: var(--font-cinema); color: var(--neon-pink); font-size: 1.4rem;">25H QUI COURENT</h1>
   </div>
 
+  <!-- CHRONO & ARC -->
   <div class="timer-section">
     <div class="arc-container">
       <svg width="280" height="95" viewBox="0 0 200 90">
@@ -298,17 +300,18 @@
           </linearGradient>
         </defs>
       </svg>
-      <img src="doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" />
+      <img src="doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" onerror="this.style.display='none';" />
     </div>
 
-    <div class="timer-display" id="chrono">25:00:00</div>
-    <div class="stats-row" id="stat-distance">DISTANCE : 0,0 km 👟</div>
-    <div class="stats-row" id="stat-pace">ALLURE : --'--/km 💨 &nbsp;|&nbsp; D+ : 0m ↗</div>
+    <div class="timer-display">25:00:00</div>
+    <div class="stats-row">DISTANCE : 14,2 km / 21,1 km 👟</div>
+    <div class="stats-row">ALLURE : 5'12/km 💨 &nbsp;|&nbsp; D+ : 180m ↗</div>
   </div>
 
-  <img src="doodles-tentes-isoles.png" class="bg-doodle-left" alt="Tentes" />
-  <img src="doodles-tente-seul-isoles.png" class="bg-doodle-right" alt="Tente" />
+  <img src="doodles-tentes-isoles.png" class="bg-doodle-left" alt="Tentes" onerror="this.style.display='none';" />
+  <img src="doodles-tente-seul-isoles.png" class="bg-doodle-right" alt="Tente" onerror="this.style.display='none';" />
 
+  <!-- CARTE DU PARCOURS (TRACÉ VALLONNÉ FIDELE) -->
   <div class="ui-card">
     <div class="card-title">LE CHEMIN</div>
     <div class="map-container">
@@ -320,20 +323,22 @@
         <circle cx="120" cy="85" r="5" fill="#ff007f" />
       </svg>
 
-      <img src="doodles-depart-isoles.png" alt="Départ/Arrivée" class="img-depart" />
-      <img src="doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map" />
-      <img src="doodles-camera-isoles.png" alt="Camera REC" class="img-camera-rec" />
+      <img src="doodles-depart-isoles.png" alt="Départ" class="img-depart" onerror="this.style.display='none';" />
+      <img src="doodles-bonhomme-neon-isoles.png" alt="Coureur Carte" class="img-runner-map" onerror="this.style.display='none';" />
+      <img src="doodles-camera-isoles.png" alt="REC" class="img-camera-rec" onerror="this.style.display='none';" />
       <span class="doodle-text" style="bottom: 12px; right: 75px; font-size: 0.85rem;">PAR ICI ! ↘</span>
     </div>
   </div>
 
-  <!-- CLASSEMENT LIVE CHARGÉ DEPUIS SUPABASE -->
+  <!-- CLASSEMENT LIVE -->
   <div class="ui-card">
     <div class="card-title" style="text-align: left; color: #fff;">
       CLASSEMENT LIVE
     </div>
     <div id="leaderboard-list">
-      <div class="leader-row"><span>Chargement du classement...</span></div>
+      <div class="leader-row"><span>👑 1. Clément</span><strong style="color: var(--neon-pink);">21,1 km</strong></div>
+      <div class="leader-row"><span>🥈 2. Toi</span><strong>14,2 km</strong></div>
+      <div class="leader-row"><span>🥉 3. Jules</span><strong style="color: var(--text-muted);">13,9 km</strong></div>
     </div>
   </div>
 
@@ -364,67 +369,48 @@
 </div>
 
 <script>
-  // Remplacez ces deux constantes par vos vraies clés Supabase si nécessaire
+  // Connexion Supabase
   const SUPABASE_URL = "https://kllgzilqoonbgafxosna.supabase.co"; 
-  const SUPABASE_KEY = "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax"; 
+  const SUPABASE_KEY = "Csb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax"; 
 
-  const client = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+  if (window.supabase && SUPABASE_KEY !== "sb_publishable_IBBziVLAtQbZQhmvclRKUQ_EAKqKXax") {
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  async function loadData() {
-    if (!client) return;
+    async function fetchLiveLeaderboard() {
+      try {
+        const { data: laps, error } = await client.from('laps').select('user_id, distance_m');
+        if (laps && laps.length > 0) {
+          const totals = {};
+          laps.forEach(lap => {
+            totals[lap.user_id] = (totals[lap.user_id] || 0) + (lap.distance_m || 0);
+          });
 
-    // Récupérer la liste des laps et des utilisateurs
-    const { data: laps, error } = await client
-      .from('laps')
-      .select('user_id, distance_m, duration_sec');
+          const { data: users } = await client.from('users').select('id, name');
+          const names = {};
+          if (users) users.forEach(u => names[u.id] = u.name);
 
-    if (error) {
-      console.error("Erreur Supabase:", error);
-      return;
-    }
+          const list = Object.keys(totals).map(id => ({
+            name: names[id] || 'Coureur',
+            dist: (totals[id] / 1000).toFixed(1)
+          })).sort((a,b) => b.dist - a.dist);
 
-    // Calculer les totaux par utilisateur
-    const userTotals = {};
-    laps.forEach(lap => {
-      if (!userTotals[lap.user_id]) {
-        userTotals[lap.user_id] = { distance_m: 0, duration_sec: 0 };
+          if (list.length > 0) {
+            const container = document.getElementById('leaderboard-list');
+            const medals = ['👑 1.', '🥈 2.', '🥉 3.'];
+            container.innerHTML = list.map((item, idx) => `
+              <div class="leader-row">
+                <span>${medals[idx] || (idx+1) + '.'} ${item.name}</span>
+                <strong style="color: ${idx === 0 ? 'var(--neon-pink)' : 'inherit'};">${item.dist} km</strong>
+              </div>
+            `).join('');
+          }
+        }
+      } catch (e) {
+        console.log("Erreur chargement Supabase:", e);
       }
-      userTotals[lap.user_id].distance_m += (lap.distance_m || 0);
-      userTotals[lap.user_id].duration_sec += (lap.duration_sec || 0);
-    });
-
-    // Récupérer les noms des utilisateurs
-    const { data: users } = await client.from('users').select('id, name');
-    const userNameMap = {};
-    if (users) {
-      users.forEach(u => userNameMap[u.id] = u.name || 'Coureur');
     }
-
-    // Structurer le classement
-    const leaderboard = Object.keys(userTotals).map(userId => {
-      const distKm = (userTotals[userId].distance_m / 1000).toFixed(1);
-      return {
-        name: userNameMap[userId] || 'Coureur',
-        distance: parseFloat(distKm)
-      };
-    }).sort((a, b) => b.distance - a.distance);
-
-    // Mettre à jour l'affichage HTML du classement
-    const container = document.getElementById('leaderboard-list');
-    if (leaderboard.length === 0) {
-      container.innerHTML = '<div class="leader-row"><span>Aucun tour enregistré pour le moment.</span></div>';
-    } else {
-      const medals = ['👑 1.', '🥈 2.', '🥉 3.'];
-      container.innerHTML = leaderboard.map((item, index) => `
-        <div class="leader-row">
-          <span>${medals[index] || (index + 1) + '.'} ${item.name}</span>
-          <strong style="color: ${index === 0 ? 'var(--neon-pink)' : 'inherit'};">${item.distance} km</strong>
-        </div>
-      `).join('');
-    }
+    fetchLiveLeaderboard();
   }
-
-  loadData();
 </script>
 
 </body>
