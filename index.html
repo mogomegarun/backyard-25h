@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <!-- Supabase Client JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -282,9 +281,10 @@
     ● GPS CONNECTÉ<br><span style="color: var(--text-muted); font-size: 0.6rem;">(GARMIN/STRAVA)</span>
   </span>
 
-  <!-- LOGO -->
+  <!-- LOGO : Essaie d'abord logo-25h-qui-courent.png, puis doodles-logo-isoles.png si échec -->
   <div class="top-header">
-    <img src="images/logo-25h-qui-courent.png" alt="25H QUI COURENT" class="logo-img" onerror="this.onerror=null; this.src='images/doodles-logo-isoles.png';" />
+    <img src="images/logo-25h-qui-courent.png" alt="25H QUI COURENT" class="logo-img" 
+         onerror="this.onerror=null; this.src='images/doodles-logo-isoles.png';" />
   </div>
 
   <!-- CHRONO & ARC -->
@@ -299,7 +299,9 @@
           </linearGradient>
         </defs>
       </svg>
-      <img src="images/doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" onerror="this.onerror=null; this.src='images/doodle-runner.svg';" />
+      <!-- COUREUR SUR L'ARC : pointe vers doodles-runner-isoles.png (présent dans votre dossier GitHub) -->
+      <img src="images/doodles-runner-isoles.png" alt="Coureur" class="runner-on-arc" 
+           onerror="this.onerror=null; this.src='images/doodle-runner.svg';" />
     </div>
 
     <div class="timer-display">25:00:00</div>
@@ -310,7 +312,7 @@
   <img src="images/doodles-tentes-isoles.png" class="bg-doodle-left" alt="Tentes" onerror="this.style.display='none';" />
   <img src="images/doodles-tente-seul-isoles.png" class="bg-doodle-right" alt="Tente" onerror="this.style.display='none';" />
 
-  <!-- CARTE DU PARCOURS -->
+  <!-- CARTE DU PARCOURS (TRACÉ NET FIDÈLE AU MODÈLE) -->
   <div class="ui-card">
     <div class="card-title">LE CHEMIN</div>
     <div class="map-container">
